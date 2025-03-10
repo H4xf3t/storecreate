@@ -21,6 +21,26 @@
             flex-direction: column;
         }
 
+        .loader {
+            border: 6px solid rgba(255, 255, 255, 0.3);
+            border-top: 6px solid white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .contenido {
+            display: none;
+            text-align: center;
+        }
+
         .mensaje {
             font-size: 2rem;
             font-weight: bold;
@@ -62,8 +82,12 @@
     </style>
 </head>
 <body>
-    <div class="mensaje">Esta web solo está disponible para LATAM</div>
-    <div class="submensaje">Esta web solo admite usuarios de Latinoamérica. Si se llega a procesar pagos de otros países, se usarán medidas severas.</div>
+    <div class="loader" id="loader"></div>
+    <div class="contenido" id="contenido">
+        <div class="mensaje">Esta web solo está disponible para LATAM</div>
+        <div class="submensaje">Esta web solo admite usuarios de Latinoamérica. Si se llega a procesar pagos de otros países, se usarán medidas severas.</div>
+    </div>
+
     <script>
         function crearCirculos() {
             for (let i = 0; i < 20; i++) {
@@ -85,7 +109,12 @@
                 circulo.style.animationDuration = `${duracion}s`;
             }
         }
-        crearCirculos();
+
+        setTimeout(() => {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("contenido").style.display = "block";
+            crearCirculos();
+        }, 2000); // Simula 2 segundos de carga
     </script>
 </body>
 </html>
